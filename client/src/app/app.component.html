@@ -1,0 +1,8 @@
+<h1>{{title}}</h1>
+
+<ul>
+    <!-- *ngFor is an Angular Directive it is effectively a for loop -->
+    <li *ngFor="let user of users"> 
+        {{user.id}} - {{user.userName}}
+    </li>
+</ul>
