@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../_services/account.service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-nav',
@@ -14,20 +16,22 @@ export class NavComponent implements OnInit {
   
   //Injecting the newly created service - Account Service
   //make this constructor object public so that we can directly use the account service in the template
-  constructor(public accountService: AccountService) { }
+  //Injecting the router service so that we can route users based on action
+  constructor(public accountService: AccountService,
+     private router : Router,
+     private toastr: ToastrService ) { }
 
   ngOnInit(): void {
-    
   }
 
   login() {
     this.accountService.login(this.model).subscribe(
       {
-        next: response => {
-          console.log(response);
+        next: () => {
+          this.router.navigateByUrl('/members'); //If log in is sucessfull then navigate user to members page
         },
         error: error => {
-          console.log(error);
+          this.toastr.error(error.error);
         }
       }
     )
@@ -35,5 +39,6 @@ export class NavComponent implements OnInit {
 
   logout(){
     this.accountService.logout(); //This will remove the existing data from localstorage and the currentUserSource
+    this.router.navigateByUrl('/'); //Once user has logged out navigate them to the homepage
   }
 }

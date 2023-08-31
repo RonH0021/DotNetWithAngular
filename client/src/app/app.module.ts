@@ -10,6 +10,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
+import { MemberListComponent } from './members/member-list/member-list.component';
+import { MemberDetailComponent } from './members/member-detail/member-detail.component';
+import { ListsComponent } from './lists/lists.component';
+import { MessagesComponent } from './messages/messages.component';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({ //Declaration For Module
@@ -17,7 +22,11 @@ import { RegisterComponent } from './register/register.component';
     AppComponent,
     NavComponent,
     HomeComponent,
-    RegisterComponent //Declaring that the app Component needs to be loaded
+    RegisterComponent,
+    MemberListComponent,
+    MemberDetailComponent,
+    ListsComponent,
+    MessagesComponent //Declaring that the app Component needs to be loaded
   ],
   imports: [ //Imports which are needed by the angular applicaiton to function
     BrowserModule,
@@ -25,7 +34,8 @@ import { RegisterComponent } from './register/register.component';
     HttpClientModule, //Adding HttpClient Module
     FormsModule, //Import the Angular Forms Module
     BrowserAnimationsModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    ToastrModule.forRoot({positionClass:'toast-bottom-right'})
   ],
   providers: [],
   bootstrap: [AppComponent] //This module is responsible for bootstraping the AppComponent
