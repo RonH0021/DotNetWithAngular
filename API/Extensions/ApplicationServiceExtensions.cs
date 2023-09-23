@@ -24,6 +24,11 @@ namespace API.Extensions
             //We specify the interface and its implementation because it helps in unit testing
             services.AddScoped<ITokenService, TokenService>();
 
+            services.AddScoped<IUserRepository,UserRepository>();
+            
+            //If there are multiple solutions this specifies in which solution the auto mapper will work, in our case there is only one solution
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
             return services;
         }
     }

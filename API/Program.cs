@@ -1,5 +1,7 @@
+using API.Data;
 using API.Extensions;
 using API.Middleware;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,5 +27,23 @@ app.UseAuthentication(); //To check if user has valid Token
 app.UseAuthorization(); //To check if authenticated user has authority to access resource
 
 app.MapControllers();
+
+//Use the scope to get all the services which is present in this application
+using var scope = app.Services.CreateScope();
+var services  = scope.ServiceProvider;
+
+try
+{
+    //Get the DataContext Service and then send that to our SeedUser Method
+    var context = services.GetRequiredService<DataContext>();
+    //Asynchronously applies any pending migrations for the context to the database. Will create the database if it does not already exist.
+    await context.Database.MigrateAsync();
+    await Seed.SeedUsers(context);
+}
+catch (Exception ex)
+{
+    var logger = services.GetRequiredService<ILogger<Program>>();
+    logger.LogError(ex,"An Error Occurred during Migration");
+}
 
 app.Run();
