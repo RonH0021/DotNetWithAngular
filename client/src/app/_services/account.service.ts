@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
 import { User } from '../_models/user';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root' //This means this service is injected into the root module (which is app.component.ts)
 })
 export class AccountService {
-  baseUrl ="https://localhost:5001/api/"; //The base url of the API which will be hit
+  baseUrl =environment.apiUrl; //The base url of the API which will be hit is retrived from enviroments file
 
   //We are creating a new behaviourSubject which is a special type of observable
   //We are setting initial value to be null but it will throw error if we keep the type as only <User> since null cannot be mapped to User type. Hence using pipe operator we specify that the type of the behaviour subject can be either User or Null.

@@ -18,6 +18,8 @@ import { TestErrorComponent } from './errors/test-error/test-error.component';
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
+import { MemberCardComponent } from './members/member-card/member-card.component';
+import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 
 
 
@@ -28,12 +30,12 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
     HomeComponent,
     RegisterComponent,
     MemberListComponent,
-    MemberDetailComponent,
     ListsComponent,
     MessagesComponent,
     TestErrorComponent,
     NotFoundComponent,
     ServerErrorComponent,
+    MemberCardComponent,
   ],
   imports: [ //Imports which are needed by the angular applicaiton to function
     BrowserModule,
@@ -45,7 +47,8 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
   ],
   providers: [
     //We are telling angular application that we have created a custom ErrorInterceptor, that needs to be used as an HTTP_Interceptor. Since there are multiple interceptor, and our custom interceptor needs to work along side existing interceptors and not replace them, we will specify multi as true
-    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi:true}
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi:true},
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi:true}
   ],
   bootstrap: [AppComponent] //This module is responsible for bootstraping the AppComponent
 })

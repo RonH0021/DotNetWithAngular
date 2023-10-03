@@ -15,22 +15,22 @@ export class HomeComponent implements OnInit {
   constructor(private http : HttpClient) { }
 
   ngOnInit(): void {
-    this.getUsers();
+    // this.getUsers();
   }
 
-  getUsers(){
-    //If we want to use a property which is in a class then we have to use 'this.'
-    //In this case 'http' is a property
-    //The http.get will - @return — An Observable of the response body as a JavaScript object.
-    //This observable is lazyloading, that means we have to subscribe to the return of the get method
-    //In order to actually use it
-    this.http.get("https://localhost:5001/api/users").subscribe( {
-      next: response => this.users = response, //What to do when response is received. 
-      //Using call back function (used in all 3)
-      error : error => console.log(error), //What to do if error is received
-      complete: () => console.log("Request sucessfully completed") //what to do at the end of the processing
-    })
-  }
+  // getUsers(){
+  //   //If we want to use a property which is in a class then we have to use 'this.'
+  //   //In this case 'http' is a property
+  //   //The http.get will - @return — An Observable of the response body as a JavaScript object.
+  //   //This observable is lazyloading, that means we have to subscribe to the return of the get method
+  //   //In order to actually use it
+  //   this.http.get("https://localhost:5001/api/users").subscribe( {
+  //     next: response => this.users = response, //What to do when response is received. 
+  //     //Using call back function (used in all 3)
+  //     error : error => console.log(error), //What to do if error is received
+  //     complete: () => console.log("Request sucessfully completed") //what to do at the end of the processing
+  //   })
+  // }
 
   registerToggle(){
     //Toggles the registerMode flag when user clicks on the register button
